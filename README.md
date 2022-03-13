@@ -13,13 +13,13 @@ games showing first in the list.
 - Spring Boot
 - Jersey (JAX-RS)
 
-##### Infrastructure
+#### Infrastructure
 - AWS Beanstalk
 
 ## API Endpoints
 
 ### Sport Schedule API
-### /schedule
+### /api/schedule
 Generic schedule API which requires a sportId to indicate the sport. Note this follows the same convention
 as the underlying core MLB Schedule API.
 
@@ -30,7 +30,7 @@ as the underlying core MLB Schedule API.
 | date             | Optional          | Specifies the day for which to return game for. No games are returned if not provided.          |
 | favoriteTeamId   | Optional          | The unique identifier for the users favorite team. The favorite team game(s) are listed first.  |
 
-### /schedule/mlb 
+### /api/schedule/mlb 
 MLB specific endpoint, where sportId is not required since it automatically defaults to MLB (sportId=1)
 
 | Query Parameters | Required/Optional | Description                                                                                     |
@@ -43,9 +43,17 @@ Note: Inputs such as sportId and language follow the convention and functionalit
 core MLB Schedule API.
 
 
-
-
 ## Developers
+### Servers
+| Env | Host                                                   | Description                                         |
+|-----|--------------------------------------------------------|-----------------------------------------------------|
+| Dev | http://mlb-schedule-api.us-east-1.elasticbeanstalk.com | Running on AWS Beanstalk<br/> Note: SSL not enabled |
+
+#### Examples
+| Use Case                                                 | Sample URL                                                                                                     |
+|----------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| Get MLB Games for 2021-09-11, favorite team is Yankees   | http://www.mlb-schedule-api.us-east-1.elasticbeanstalk.com/api/schedule/mlb?date=2021-09-11&favoriteTeamId=147 |
+| Get MLB Games for 2021-09-11, favorite team is Blue Jays | http://www.mlb-schedule-api.us-east-1.elasticbeanstalk.com/api/schedule/mlb?date=2021-09-11&favoriteTeamId=141 |
 
 ### Local Development
 
