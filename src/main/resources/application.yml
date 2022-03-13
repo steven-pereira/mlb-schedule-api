@@ -1,0 +1,12 @@
+apis:
+  mlb-schedule:
+    url: https://statsapi.mlb.com/api/v1/schedule
+
+defaults:
+  language: en
+  sportId: 1
+
+spring:
+  jackson:
+    serialization:
+      indent_output: true
