@@ -8,7 +8,7 @@ public interface IMlbScheduleService {
 
     MlbScheduleResponse getSchedule(Long favoriteTeamId, LocalDate date);
 
-    MlbScheduleResponse getSchedule(Long favoriteTeamId, LocalDate date, Long sportId);
+    MlbScheduleResponse getSchedule(Long favoriteTeamId, LocalDate date, String language);
 
     MlbScheduleResponse getSchedule(Long favoriteTeamId, LocalDate date, Long sportId, String language);
 }

@@ -19,12 +19,29 @@ public class ScheduleRestController implements IScheduleRestController {
     private IMlbScheduleService mlbScheduleService;
 
     @GET
+    @Path("/mlb")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getSchedule(@QueryParam("language") String language,
+                                @QueryParam("date") String date,
+                                @QueryParam("favoriteTeamId") Long favoriteTeamId) throws InvalidRequestException {
+
+        LocalDate dt = parseDate(date);
+
+        MlbScheduleResponse mlbScheduleResponse = mlbScheduleService.getSchedule(favoriteTeamId, dt, language);
+
+        return Response.ok(mlbScheduleResponse).build();
+    }
+
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Override
     public Response getSchedule(@QueryParam("language") String language,
                                 @QueryParam("sportId") Long sportId,
                                 @QueryParam("date") String date,
                                 @QueryParam("favoriteTeamId") Long favoriteTeamId) throws InvalidRequestException {
+        if (sportId == null) {
+            throw new InvalidRequestException("Missing required parameter sportId");
+        }
 
         LocalDate dt = parseDate(date);
 
@@ -51,7 +68,7 @@ public class ScheduleRestController implements IScheduleRestController {
         try {
             dt = LocalDate.parse(date);
         } catch (Exception e) {
-            throw new InvalidRequestException(date);
+            throw new InvalidRequestException("Invalid Request with value: " + date);
         }
         return dt;
     }

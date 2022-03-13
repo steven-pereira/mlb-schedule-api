@@ -24,14 +24,14 @@ public class MlbScheduleService implements IMlbScheduleService {
 
     @Override
     public MlbScheduleResponse getSchedule(Long favoriteTeamId, LocalDate date) {
-        Long defaultSportId = Long.valueOf(env.getProperty(EnvironmentKey.DEFAULT_SPORT_ID));
-        return getSchedule(favoriteTeamId, date, defaultSportId);
+        String defaultLanguage = env.getProperty(EnvironmentKey.DEFAULT_LANGUAGE);
+        return getSchedule(favoriteTeamId, date, defaultLanguage);
     }
 
     @Override
-    public MlbScheduleResponse getSchedule(Long favoriteTeamId, LocalDate date, Long sportId) {
-        String defaultLanguage = env.getProperty(EnvironmentKey.DEFAULT_LANGUAGE);
-        return getSchedule(favoriteTeamId, date, sportId, defaultLanguage);
+    public MlbScheduleResponse getSchedule(Long favoriteTeamId, LocalDate date, String language) {
+        Long defaultSportId = Long.valueOf(env.getProperty(EnvironmentKey.DEFAULT_SPORT_ID));
+        return getSchedule(favoriteTeamId, date, defaultSportId, language);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class MlbScheduleService implements IMlbScheduleService {
         MlbScheduleResponse mlbScheduleResponse = mlbScheduleDao.getSchedule(date, sportId, language);
 
         // If there are no games on the given date, then nothing to do
-        if (mlbScheduleResponse == null && mlbScheduleResponse.getDates() == null) {
+        if (mlbScheduleResponse == null || mlbScheduleResponse.getDates() == null || mlbScheduleResponse.getDates().isEmpty()) {
             return mlbScheduleResponse;
         }
 
@@ -68,6 +68,7 @@ public class MlbScheduleService implements IMlbScheduleService {
             return;
         }
 
+        // Count used to determine if we need to handle multiple games for the same favorite team
         int favTeamGamesFound = 0;
 
         // Iterate Through Each Game and Check if Away or Home Team is Favorite Team
@@ -89,24 +90,28 @@ public class MlbScheduleService implements IMlbScheduleService {
 
         // If we found 2 games for the same team, we need to figure out which game should show first
         if (favTeamGamesFound == 2) {
-            // Grab first game and second game to compare which should be first
-            Game firstGame = games.get(0);
-            Game secondGame = games.get(1);
+            handleDoubleHeaders(games);
+        }
+    }
 
-            // Check if the first game is in progress
-            if (GameUtils.isGameInProgress(firstGame)) {
-                // Do nothing since we want in progress game to be shown 1st
-                // Not possible to have 2 games in progress with same team playing
-            } else if (GameUtils.isGameInProgress(secondGame)) {
-                // Flip the first and second game since the second game is in progress
-                games.remove(1);
-                games.addFirst(secondGame);
-            } else if (firstGame.getStatus().getStartTimeTBD()) {
-                // Flip the first and seconds games since first game has startTimeTBD flag set to true
-                // which means it's the game that will happen after the 'first' game is over
-                games.remove(1);
-                games.addFirst(secondGame);
-            }
+    private void handleDoubleHeaders(LinkedList<Game> games) {
+        // Grab first game and second game to compare which should be first
+        Game firstGame = games.get(0);
+        Game secondGame = games.get(1);
+
+        // Check if the first game is in progress
+        if (GameUtils.isGameInProgress(firstGame)) {
+            // Do nothing since we want in progress game to be shown 1st
+            // Not possible to have 2 games in progress with same team playing
+        } else if (GameUtils.isGameInProgress(secondGame)) {
+            // Flip the first and second game since the second game is in progress
+            games.remove(1);
+            games.addFirst(secondGame);
+        } else if (firstGame.getStatus().getStartTimeTBD()) {
+            // Flip the first and seconds games since first game has startTimeTBD flag set to true
+            // which means it's the game that will happen after the 'first' game is over
+            games.remove(1);
+            games.addFirst(secondGame);
         }
     }
 }

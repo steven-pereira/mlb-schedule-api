@@ -7,5 +7,8 @@ import javax.ws.rs.core.Response;
 public interface IScheduleRestController {
 
     /** Add Swagger Documentation Here */
+    Response getSchedule(String language, String date, Long favoriteTeamId) throws InvalidRequestException;
+
+    /** Add Swagger Documentation Here */
     Response getSchedule(String language, Long sportId, String date, Long favoriteTeamId) throws InvalidRequestException;
 }

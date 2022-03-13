@@ -3,6 +3,9 @@ package com.mlb.api.rest.model;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Invalid Request Response Payload. Follows the same schema/design as the underlying MLB API.
+ */
 public class InvalidRequestResponse {
 
     private Long messageNumber;
@@ -10,9 +13,9 @@ public class InvalidRequestResponse {
     private String timestamp;
     private Long traceId;
 
-    public InvalidRequestResponse(String inputValue) {
+    public InvalidRequestResponse(String message) {
         this.messageNumber = null;
-        this.message = String.format("Invalid Request with value: %s", inputValue);
+        this.message = message;
         this.traceId = null;
 
         DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
