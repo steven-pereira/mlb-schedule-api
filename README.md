@@ -23,21 +23,21 @@ games showing first in the list.
 Generic schedule API which requires a sportId to indicate the sport. Note this follows the same convention
 as the underlying core MLB Schedule API.
 
-| Query Parameters | Required/Optional | Description                                                                                     |
-|------------------|-------------------|-------------------------------------------------------------------------------------------------|
-| sportId          | Required          | The unique identifier for a sport (i.e. MLB = 1)                                                |
-| language         | Optional          | The language preferred in the response                                                          |
-| date             | Optional          | Specifies the day for which to return game for. No games are returned if not provided.          |
-| favoriteTeamId   | Optional          | The unique identifier for the users favorite team. The favorite team game(s) are listed first.  |
+| Query Parameters | Required/Optional | Description                                                                                           |
+|------------------|-------------------|-------------------------------------------------------------------------------------------------------|
+| sportId          | Required          | The unique identifier for a sport (i.e. MLB = 1)                                                      |
+| language         | Optional          | The language preferred in the response                                                                |
+| date             | Optional          | Specifies the day ("yyyy-MM-dd") for which to return game for. No games are returned if not provided. |
+| favoriteTeamId   | Optional          | The unique identifier for the users favorite team. The favorite team game(s) are listed first.        |
 
 ### /api/schedule/mlb 
 MLB specific endpoint, where sportId is not required since it automatically defaults to MLB (sportId=1)
 
-| Query Parameters | Required/Optional | Description                                                                                     |
-|------------------|-------------------|-------------------------------------------------------------------------------------------------|
-| language         | Optional          | The language preferred in the response                                                          |
-| date             | Optional          | Specifies the day for which to return game for. No games are returned if not provided.          |
-| favoriteTeamId   | Optional          | The unique identifier for the users favorite team. The favorite team game(s) are listed first   |
+| Query Parameters | Required/Optional | Description                                                                                           |
+|------------------|-------------------|-------------------------------------------------------------------------------------------------------|
+| language         | Optional          | The language preferred in the response                                                                |
+| date             | Optional          | Specifies the day ("yyyy-MM-dd") for which to return game for. No games are returned if not provided. |
+| favoriteTeamId   | Optional          | The unique identifier for the users favorite team. The favorite team game(s) are listed first         |
 
 Note: Inputs such as sportId and language follow the convention and functionality of the underlying
 core MLB Schedule API.
