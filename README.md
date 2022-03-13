@@ -1,4 +1,4 @@
-#MLB Schedule API
+# MLB Schedule API
 
 ## Description
 Provides an API to get the schedule of games for a particular day with the user's favorite team
