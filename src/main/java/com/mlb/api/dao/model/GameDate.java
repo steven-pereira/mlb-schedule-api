@@ -3,7 +3,6 @@ package com.mlb.api.dao.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 

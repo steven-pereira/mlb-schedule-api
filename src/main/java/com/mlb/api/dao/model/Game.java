@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Game {
     private Long gamePk;
@@ -15,8 +14,8 @@ public class Game {
     private LocalDateTime gameDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate officialDate;
-    private Date rescheduledFrom;
-    private Date rescheduledFromDate;
+    private LocalDateTime rescheduledFrom;
+    private LocalDate rescheduledFromDate;
     private GameStatus status;
     private GameTeams teams;
     private Venue venue;
@@ -89,19 +88,19 @@ public class Game {
         this.officialDate = officialDate;
     }
 
-    public Date getRescheduledFrom() {
+    public LocalDateTime getRescheduledFrom() {
         return rescheduledFrom;
     }
 
-    public void setRescheduledFrom(Date rescheduledFrom) {
+    public void setRescheduledFrom(LocalDateTime rescheduledFrom) {
         this.rescheduledFrom = rescheduledFrom;
     }
 
-    public Date getRescheduledFromDate() {
+    public LocalDate getRescheduledFromDate() {
         return rescheduledFromDate;
     }
 
-    public void setRescheduledFromDate(Date rescheduledFromDate) {
+    public void setRescheduledFromDate(LocalDate rescheduledFromDate) {
         this.rescheduledFromDate = rescheduledFromDate;
     }
 

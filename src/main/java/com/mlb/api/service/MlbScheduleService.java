@@ -112,6 +112,10 @@ public class MlbScheduleService implements IMlbScheduleService {
             // which means it's the game that will happen after the 'first' game is over
             games.remove(1);
             games.addFirst(secondGame);
+        } else if (firstGame.getGameDate().isAfter(secondGame.getGameDate())) {
+            // Flip the first and second games to maintain chronological order
+            games.remove(1);
+            games.addFirst(secondGame);
         }
     }
 }
