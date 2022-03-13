@@ -20,6 +20,8 @@ games showing first in the list.
 
 ### Sport Schedule API
 ### /schedule
+Generic schedule API which requires a sportId to indicate the sport. Note this follows the same convention
+as the underlying core MLB Schedule API.
 
 | Query Parameters | Required/Optional | Description                                                                                     |
 |------------------|-------------------|-------------------------------------------------------------------------------------------------|
@@ -29,6 +31,7 @@ games showing first in the list.
 | favoriteTeamId   | Optional          | The unique identifier for the users favorite team. The favorite team game(s) are listed first.  |
 
 ### /schedule/mlb 
+MLB specific endpoint, where sportId is not required since it automatically defaults to MLB (sportId=1)
 
 | Query Parameters | Required/Optional | Description                                                                                     |
 |------------------|-------------------|-------------------------------------------------------------------------------------------------|
