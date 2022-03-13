@@ -1,7 +1,10 @@
 package com.mlb.api.dao.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MlbScheduleResponse {
 
     private String copyright;

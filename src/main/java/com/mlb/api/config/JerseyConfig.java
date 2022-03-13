@@ -1,5 +1,6 @@
 package com.mlb.api.config;
 
+import com.mlb.api.rest.HealthRestController;
 import com.mlb.api.rest.ScheduleRestController;
 import com.mlb.api.rest.model.InvalidRequestException;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -19,6 +20,7 @@ public class JerseyConfig extends ResourceConfig {
 
     private void registerRestControllers() {
         // Add Controllers Here
+        register(HealthRestController.class);
         register(ScheduleRestController.class);
     }
 

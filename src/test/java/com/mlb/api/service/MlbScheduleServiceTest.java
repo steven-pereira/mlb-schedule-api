@@ -8,7 +8,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.context.annotation.PropertySource;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -94,7 +93,6 @@ public class MlbScheduleServiceTest {
         // Verify the last game is the same
         Long expectedLastGameId = 4L;
         assertEquals(expectedLastGameId, mlbScheduleResponse.getDates().get(0).getGames().get(4).getGamePk());
-
 
         // Verify the total count never changed
         int expectedGameSize = 5;

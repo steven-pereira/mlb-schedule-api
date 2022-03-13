@@ -1,5 +1,8 @@
 package com.mlb.api.dao.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Content {
 
     private String link;
