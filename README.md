@@ -7,6 +7,7 @@ games showing first in the list.
 #### Design Considerations
 - Maintain same model/schema as upstream core MLB Schedule API, making it seamless for existing clients to use
 - Provide the same flexibility as the core MLB Schedule API by still exposing inputs such as 'language', 'sportId'
+- Support wide range of type of clients, including mobile devices (e.g. gzip compression)
 
 #### Tech Stack
 - Java
